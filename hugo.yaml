@@ -1,24 +1,28 @@
 baseURL: "https://afkorkmaz.github.io/"
-title: "Deneme baslik"
-theme: ["github.com/adityatelange/hugo-PaperMod"]
+title: "Deneme Baslik"
+theme: "PaperMod"  # Artık sadece klasör adını yazıyoruz
 
-# HTML dosyaları üretilirken temiz linkler olsun
+pagination:
+  pagerSize: 10
+
+# URL Ayarları
 canonifyURLs: true
-paginate: 10
 
-# PaperMod settings
+# PaperMod Ayarları
 params:
-  defaultTheme: auto # Sistem temasını kullanır (Dark/Light)
+  defaultTheme: auto
   ShowReadingTime: true
   ShowShareButtons: true
   ShowPostNavLinks: true
   ShowBreadCrumbs: true
   ShowCodeCopyButtons: true
   
-  # Yazar Bilgisi
   author: "afk"
+  
+  # Yorumları Aktif Et
+  comments: true
 
-# languages
+# Dil Ayarları
 languages:
   tr:
     languageName: "Türkçe"
