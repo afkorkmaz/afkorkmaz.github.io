@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "e004135148e9af16",
+        "id": "58701e1120f54f4d",
         "type": "tabs",
         "children": [
           {
-            "id": "2dc64ded36a04421",
+            "id": "14687415906f6f3c",
             "type": "leaf",
             "state": {
               "type": "empty",
@@ -176,6 +176,20 @@
       "bases:Create new base": false
     }
   },
-  "active": "2dc64ded36a04421",
-  "lastOpenFiles": []
+  "active": "14687415906f6f3c",
+  "lastOpenFiles": [
+    "themes/PaperMod/images/tn.png",
+    "themes/PaperMod/images/screenshot.png",
+    "themes/PaperMod/images",
+    "themes/PaperMod/layouts/partials/templates/_funcs/get-page-images.html",
+    "themes/PaperMod/layouts/partials/templates/_funcs",
+    "themes/PaperMod/layouts/partials/templates/schema_json.html",
+    "themes/PaperMod/layouts/_default/_markup/render-image.html",
+    "themes/PaperMod/layouts/partials/templates/twitter_cards.html",
+    "themes/PaperMod/layouts/partials/templates/opengraph.html",
+    "themes/PaperMod/layouts/_default/_markup",
+    "themes/PaperMod/layouts/_default/terms.html",
+    "themes/PaperMod/layouts/_default/single.html",
+    "themes/PaperMod/README.md"
+  ]
 }
