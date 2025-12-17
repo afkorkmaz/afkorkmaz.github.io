@@ -22,17 +22,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          submodules: true  # Tema dosyalarını çekmek için
-          fetch-depth: 0    # Git geçmişini (tarihler için) çekmek için
-
-      - name: Install Theme
-        run: git clone https://github.com/adityatelange/hugo-PaperMod themes/PaperMod --depth 1
+          submodules: true  # Tema dosyalarını submodule olarak çeker
+          fetch-depth: 0    # Git geçmişini çeker
 
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v3
         with:
-          hugo-version: 'latest' # Hep en son sürümü kullanır
-          extended: true         # PaperMod için BU ŞART (SCSS desteği)
+          hugo-version: 'latest'
+          extended: true         # PaperMod için (SCSS desteği)
 
       - name: Build
         run: hugo --minify
