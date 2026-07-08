@@ -1,0 +1,118 @@
+---
+import { getCollection } from "astro:content";
+import { Image } from "astro:assets";
+import BaseHead from "../../components/BaseHead.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import FormattedDate from "../../components/FormattedDate.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../../consts";
+
+const posts = (await getCollection("blog")).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+
+const firstPost = posts[0];
+const otherPosts = posts.slice(1);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead title={`Blog | ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
+  </head>
+  <body
+    class="bg-zinc-50 text-zinc-900 dark:bg-zinc-950 dark:text-zinc-100 antialiased min-h-screen flex flex-col transition-colors duration-300"
+  >
+    <Header />
+
+    <main class="grow w-full mb-24">
+      <section class="max-w-4xl mx-auto px-4 py-16 space-y-12">
+        <h1 class="text-4xl sm:text-5xl font-bold tracking-tight">Blog</h1>
+
+        {
+          posts.length > 0 ? (
+            <div class="space-y-12">
+              {firstPost && (
+                <article class="group">
+                  <a
+                    href={`/blog/${firstPost.id}/`}
+                    class="block space-y-5 rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-zinc-950"
+                  >
+                    {firstPost.data.heroImage && (
+                      <div class="overflow-hidden rounded-xl border border-zinc-200 dark:border-zinc-800">
+                        <Image
+                          src={firstPost.data.heroImage}
+                          alt=""
+                          width={960}
+                          height={480}
+                          class="w-full aspect-video md:aspect-2/1 object-cover transition-transform duration-500 group-hover:scale-105"
+                        />
+                      </div>
+                    )}
+                    <div class="space-y-2">
+                      <p class="text-sm font-medium text-zinc-500 dark:text-zinc-400">
+                        <FormattedDate date={firstPost.data.pubDate} />
+                      </p>
+                      <h2 class="text-2xl sm:text-3xl font-bold group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                        {firstPost.data.title}
+                      </h2>
+                      {firstPost.data.description && (
+                        <p class="text-zinc-600 dark:text-zinc-400 text-lg line-clamp-2">
+                          {firstPost.data.description}
+                        </p>
+                      )}
+                    </div>
+                  </a>
+                </article>
+              )}
+
+              {otherPosts.length > 0 && (
+                <div class="flex flex-col divide-y divide-zinc-200 dark:divide-zinc-800 border-t border-zinc-200 dark:border-zinc-800">
+                  {otherPosts.map((post) => (
+                    <article class="group py-8 first:pt-8">
+                      <a
+                        href={`/blog/${post.id}/`}
+                        class="flex flex-col sm:flex-row gap-4 sm:gap-6 items-start rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-4 dark:focus-visible:ring-offset-zinc-950"
+                      >
+                        {post.data.heroImage && (
+                          <div class="w-full sm:w-64 shrink-0 overflow-hidden rounded-lg border border-zinc-200 dark:border-zinc-800">
+                            <Image
+                              src={post.data.heroImage}
+                              alt=""
+                              width={320}
+                              height={180}
+                              class="w-full aspect-video sm:aspect-4/3 object-cover transition-transform duration-500 group-hover:scale-105"
+                            />
+                          </div>
+                        )}
+                        <div class="flex-1 space-y-2 py-1">
+                          <p class="text-sm font-medium text-zinc-500 dark:text-zinc-400">
+                            <FormattedDate date={post.data.pubDate} />
+                          </p>
+                          <h3 class="text-xl font-bold group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                            {post.data.title}
+                          </h3>
+                          {post.data.description && (
+                            <p class="text-zinc-600 dark:text-zinc-400 line-clamp-2">
+                              {post.data.description}
+                            </p>
+                          )}
+                        </div>
+                      </a>
+                    </article>
+                  ))}
+                </div>
+              )}
+            </div>
+          ) : (
+            <p class="text-zinc-500 dark:text-zinc-400 text-sm italic">
+              No posts published yet. Stay tuned!
+            </p>
+          )
+        }
+      </section>
+    </main>
+
+    <Footer />
+  </body>
+</html>
